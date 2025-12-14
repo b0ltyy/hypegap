@@ -78,7 +78,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* CTA card (ipv fake search) */}
+          {/* CTA card */}
           <div style={{ width: 360, maxWidth: "100%" }}>
             <div className="card card-pad" style={{ border: "1px solid rgba(39,39,42,0.9)" }}>
               <div className="badge">Discover</div>
@@ -95,8 +95,6 @@ export default async function HomePage() {
                   Trending
                 </Link>
               </div>
-
-              
             </div>
           </div>
         </div>
@@ -128,30 +126,21 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Grid */}
+      {/* ✅ MOBILE-FIRST GRID (STAP 1 FIX) */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))",
-          gap: 14,
+          gridTemplateColumns: "repeat(2, 1fr)", // 👈 MOBILE: altijd 2 kolommen
+          gap: 12,
         }}
       >
         {movies.map((m) => (
           <Link
             key={m.id}
             href={`/movie/${m.id}`}
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
-            <div
-              className="card"
-              style={{
-                transform: "translateY(0)",
-                transition: "150ms",
-              }}
-            >
+            <div className="card">
               <div style={{ position: "relative" }}>
                 {m.poster_path ? (
                   <img
@@ -177,7 +166,6 @@ export default async function HomePage() {
                   </div>
                 )}
 
-                {/* top overlay */}
                 <div
                   style={{
                     position: "absolute",
@@ -186,14 +174,23 @@ export default async function HomePage() {
                   }}
                 />
                 <div style={{ position: "absolute", left: 10, bottom: 10, right: 10 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.2 }}>{m.title}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.2 }}>
+                    {m.title}
+                  </div>
                   <div style={{ fontSize: 11, color: "#cbd5e1", marginTop: 4 }}>
                     {m.release_date ? m.release_date.slice(0, 4) : "—"}
                   </div>
                 </div>
               </div>
 
-              <div style={{ padding: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div
+                style={{
+                  padding: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <span className="badge">Rate → Gap</span>
                 <span style={{ fontSize: 12, color: "#a1a1aa" }}>Open</span>
               </div>

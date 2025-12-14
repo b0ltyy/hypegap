@@ -28,14 +28,12 @@ export default function LoginPage() {
         return;
       }
 
-      // Check profile username
       const { data: p, error } = await supabase
         .from("profiles")
         .select("id, username")
         .eq("id", user.id)
         .maybeSingle();
 
-      // Als query faalt: stuur naar /me (better than stuck)
       if (error) {
         router.replace("/me");
         return;
@@ -43,18 +41,13 @@ export default function LoginPage() {
 
       const profile = p as Profile | null;
 
-      // Force username keuze
-      if (!profile?.username) {
-        router.replace("/onboarding");
-      } else {
-        router.replace("/me");
-      }
+      if (!profile?.username) router.replace("/onboarding");
+      else router.replace("/me");
     }
 
     (async () => {
       await routeUser();
 
-      // luister naar auth changes (na Google login)
       unsub = supabase.auth.onAuthStateChange(async (event) => {
         if (event === "SIGNED_IN") {
           await routeUser();
@@ -70,7 +63,6 @@ export default function LoginPage() {
     };
   }, [router]);
 
-  // Tijdens checken even een nette card tonen (voorkomt flikkeren)
   if (checking) {
     return (
       <div style={{ maxWidth: 520, margin: "90px auto", display: "grid", gap: 14 }}>
@@ -90,7 +82,7 @@ export default function LoginPage() {
         <div className="badge">HypeGap</div>
         <h1 style={{ margin: "10px 0 6px", fontSize: 26, letterSpacing: -0.3 }}>Login</h1>
         <p style={{ margin: 0, color: "#a1a1aa" }}>
-          Nieuw account? Na Google login kies je meteen een <b style={{ color: "#e4e4e7" }}>username</b>.
+          Nieuw account? Na signup kies je meteen een <b style={{ color: "#e4e4e7" }}>username</b>.
         </p>
       </div>
 
@@ -98,6 +90,13 @@ export default function LoginPage() {
         <Auth
           supabaseClient={supabase}
           providers={["google"]}
+          view="sign_in"
+          showLinks
+          redirectTo={
+            typeof window !== "undefined"
+              ? `${window.location.origin}/auth/callback`
+              : undefined
+          }
           appearance={{
             theme: ThemeSupa,
             variables: {
@@ -122,28 +121,17 @@ export default function LoginPage() {
               },
             },
             style: {
-              container: {
-                width: "100%",
-              },
-              label: {
-                color: "#a1a1aa",
-              },
+              container: { width: "100%" },
+              label: { color: "#a1a1aa" },
               input: {
                 background: "rgba(24,24,27,0.9)",
                 color: "#e4e4e7",
                 borderColor: "rgba(63,63,70,0.9)",
                 borderRadius: "14px",
               },
-              button: {
-                borderRadius: "14px",
-                fontWeight: 800,
-              },
-              message: {
-                color: "#e4e4e7",
-              },
-              anchor: {
-                color: "#a5b4fc",
-              },
+              button: { borderRadius: "14px", fontWeight: 800 },
+              message: { color: "#e4e4e7" },
+              anchor: { color: "#a5b4fc" },
             },
           }}
         />

@@ -1,88 +1,115 @@
 import "./globals.css";
 import Link from "next/link";
-import NavAuth from "./_components/NavAuth";
+import { ReactNode } from "react";
 
 export const metadata = {
   title: "HypeGap",
-  description: "Rate films vóór en na het kijken. Ontdek welke films de hype waarmaken.",
+  description: "Rate films vóór en na het kijken. Ontdek welke films hype waarmaken.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="nl">
       <body>
-        <div style={{ minHeight: "100vh", background: "#09090b", color: "#fafafa" }}>
-          <header
+        {/* Top Navigation */}
+        <header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 50,
+            background: "rgba(9,9,11,0.85)",
+            backdropFilter: "blur(10px)",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <div
             style={{
-              position: "sticky",
-              top: 0,
-              zIndex: 50,
-              borderBottom: "1px solid rgba(39,39,42,0.8)",
-              background: "rgba(9,9,11,0.7)",
-              backdropFilter: "blur(10px)",
+              maxWidth: 1200,
+              margin: "0 auto",
+              padding: "12px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
             }}
           >
-            <div
-              className="container"
+            {/* Logo / Brand */}
+            <Link
+              href="/"
               style={{
-                height: 56,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                fontWeight: 900,
+                letterSpacing: -0.5,
+                fontSize: 18,
+                color: "#e4e4e7",
+                textDecoration: "none",
               }}
             >
-              <Link
-                href="/"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                <div
-                  style={{
-                    height: 32,
-                    width: 32,
-                    borderRadius: 14,
-                    background: "linear-gradient(135deg, #6366f1, #d946ef)",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
-                  }}
-                />
-                <div style={{ lineHeight: 1.1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700 }}>HypeGap</div>
-                  <div style={{ fontSize: 11, color: "#a1a1aa" }}>expectation vs reality</div>
-                </div>
+              HypeGap
+            </Link>
+
+            {/* Nav links */}
+            <nav
+              style={{
+                display: "flex",
+                gap: 14,
+                marginLeft: 12,
+                flexWrap: "wrap",
+              }}
+            >
+              <Link href="/surprising" className="navlink">
+                🔥 Surprising
               </Link>
 
-              <Link className="navlink" href="/search">Search</Link>
+              <Link href="/discover" className="navlink">
+                🎲 Discover
+              </Link>
 
+              <Link href="/leaderboard" className="navlink">
+                🏆 Leaderboard
+              </Link>
+            </nav>
 
-              <nav style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <Link className="navlink" href="/surprising">
-                  Surprising
-                </Link>
-                <Link className="navlink" href="/leaderboard">
-                  Leaderboard
-                </Link>
-
-                {/* ✅ Auth-aware: toont Login of Mijn account */}
-                <NavAuth />
-              </nav>
+            {/* Right side */}
+            <div style={{ marginLeft: "auto" }}>
+              <Link href="/me" className="btn btn-ghost">
+                Mijn account
+              </Link>
             </div>
-          </header>
+          </div>
+        </header>
 
-          <main className="container" style={{ paddingTop: 32, paddingBottom: 32 }}>
-            {children}
-          </main>
+        {/* Page content */}
+        <main
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "20px 16px 48px",
+          }}
+        >
+          {children}
+        </main>
 
-          <footer style={{ borderTop: "1px solid rgba(39,39,42,0.6)" }}>
-            <div className="container" style={{ paddingTop: 24, paddingBottom: 24, fontSize: 12, color: "#71717a" }}>
-              © {new Date().getFullYear()} HypeGap — built for signal, not hype.
-            </div>
-          </footer>
-        </div>
+        {/* Footer */}
+        <footer
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            marginTop: 48,
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              padding: "16px",
+              fontSize: 12,
+              color: "#71717a",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>© {new Date().getFullYear()} HypeGap</span>
+            <span>Built for signal, not hype</span>
+          </div>
+        </footer>
       </body>
     </html>
   );

@@ -112,3 +112,9 @@ body {
   font-size: 11px;
   color: rgb(228 228 231);
 }
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

@@ -1,0 +1,114 @@
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Layout */
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 72rem; /* ~ max-w-6xl */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Nav link */
+.navlink {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: rgb(212 212 216);
+  transition: 150ms;
+  text-decoration: none;
+}
+.navlink:hover {
+  background: rgb(24 24 27);
+  color: rgb(250 250 250);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: 150ms;
+  text-decoration: none;
+  border: 0;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: rgb(99 102 241);
+  color: white;
+}
+.btn-primary:hover {
+  background: rgb(129 140 248);
+}
+
+.btn-ghost {
+  background: rgb(24 24 27);
+  color: rgb(228 228 231);
+}
+.btn-ghost:hover {
+  background: rgb(39 39 42);
+}
+
+/* Inputs */
+.input,
+.select {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(39 39 42);
+  background: rgb(9 9 11);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: rgb(244 244 245);
+  outline: none;
+}
+.input::placeholder {
+  color: rgb(113 113 122);
+}
+.input:focus,
+.select:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+}
+
+/* Card + badge */
+.card {
+  border-radius: 1rem;
+  border: 1px solid rgba(39, 39, 42, 0.9);
+  background: rgba(9, 9, 11, 0.6);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.card-pad {
+  padding: 1rem;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgb(39 39 42);
+  background: rgb(24 24 27);
+  padding: 0.25rem 0.5rem;
+  font-size: 11px;
+  color: rgb(228 228 231);
+}

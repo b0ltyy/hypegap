@@ -78,7 +78,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* CTA card */}
+          {/* CTA card (ipv fake search) */}
           <div style={{ width: 360, maxWidth: "100%" }}>
             <div className="card card-pad" style={{ border: "1px solid rgba(39,39,42,0.9)" }}>
               <div className="badge">Discover</div>
@@ -94,6 +94,10 @@ export default async function HomePage() {
                 <Link className="btn btn-ghost" href="/">
                   Trending
                 </Link>
+              </div>
+
+              <div style={{ marginTop: 10, fontSize: 12, color: "#71717a" }}>
+                Tip: zoek “Dune 2021” of “Interstellar”.
               </div>
             </div>
           </div>
@@ -126,21 +130,30 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ✅ MOBILE-FIRST GRID (STAP 1 FIX) */}
+      {/* Grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)", // 👈 MOBILE: altijd 2 kolommen
-          gap: 12,
+          gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))",
+          gap: 14,
         }}
       >
         {movies.map((m) => (
           <Link
             key={m.id}
             href={`/movie/${m.id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
           >
-            <div className="card">
+            <div
+              className="card"
+              style={{
+                transform: "translateY(0)",
+                transition: "150ms",
+              }}
+            >
               <div style={{ position: "relative" }}>
                 {m.poster_path ? (
                   <img
@@ -166,6 +179,7 @@ export default async function HomePage() {
                   </div>
                 )}
 
+                {/* top overlay */}
                 <div
                   style={{
                     position: "absolute",
@@ -174,23 +188,14 @@ export default async function HomePage() {
                   }}
                 />
                 <div style={{ position: "absolute", left: 10, bottom: 10, right: 10 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.2 }}>
-                    {m.title}
-                  </div>
+                  <div style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.2 }}>{m.title}</div>
                   <div style={{ fontSize: 11, color: "#cbd5e1", marginTop: 4 }}>
                     {m.release_date ? m.release_date.slice(0, 4) : "—"}
                   </div>
                 </div>
               </div>
 
-              <div
-                style={{
-                  padding: 10,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
+              <div style={{ padding: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span className="badge">Rate → Gap</span>
                 <span style={{ fontSize: 12, color: "#a1a1aa" }}>Open</span>
               </div>
